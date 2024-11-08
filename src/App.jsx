@@ -1,4 +1,4 @@
-import NotesPage from "./pages/NotesPage";
+import NotesPage from "./pages/NotesCard";
 
 function App() {
   return (
