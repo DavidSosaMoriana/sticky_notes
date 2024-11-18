@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from "react";
 import Spinner from "../icons/Spinner";
 import { db } from "../appwrite/databases";
@@ -5,6 +6,7 @@ import { db } from "../appwrite/databases";
 export const NoteContext = createContext();
 
 const NoteProvider = ({ children }) => {
+  const [selectedNote, setSelectedNote] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notes, setNotes] = useState([]);
 
@@ -19,7 +21,7 @@ const NoteProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const contextData = {notes, setNotes};
+  const contextData = { notes, setNotes, selectedNote, setSelectedNote };
 
   return (
     <NoteContext.Provider value={contextData}>
