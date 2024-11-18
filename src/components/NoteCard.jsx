@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useRef, useEffect, useState } from "react";
-import Trash from "../icons/Trash";
+import DeleteButton from "./Deletebutton";
 import Spinner from "../icons/Spinner";
 import { setNewOffset, autoGrow, setZIndex, bodyParser } from "../utils";
 import { db } from "../appwrite/databases";
 
-const NoteCard = ({ note }) => {
+const NoteCard = ({ note, setNotes }) => {
   const [saving, setSaving] = useState(false);
   const keyUpTimer = useRef(null);
 
@@ -23,13 +23,15 @@ const NoteCard = ({ note }) => {
   }, []);
 
   const mouseDown = (e) => {
-    setZIndex(cardRef.current);
+    if (e.target.className === "card-header") {
+      setZIndex(cardRef.current);
 
-    mouseStartPos.x = e.clientX;
-    mouseStartPos.y = e.clientY;
+      mouseStartPos.x = e.clientX;
+      mouseStartPos.y = e.clientY;
 
-    document.addEventListener("mousemove", mouseMove);
-    document.addEventListener("mouseup", mouseUp);
+      document.addEventListener("mousemove", mouseMove);
+      document.addEventListener("mouseup", mouseUp);
+    }
   };
 
   const mouseMove = (e) => {
@@ -97,7 +99,7 @@ const NoteCard = ({ note }) => {
         className="card-header"
         style={{ backgroundColor: colors.colorHeader }}
       >
-        <Trash />
+        <DeleteButton noteId={note.$id} setNotes={setNotes} />
         {saving && (
           <div className="card-saving">
             <Spinner color={colors.colorText} />
