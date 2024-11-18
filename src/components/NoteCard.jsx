@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useRef, useEffect, useState } from "react";
-import DeleteButton from "./Deletebutton";
+import DeleteButton from "./DeleteButton";
 import Spinner from "../icons/Spinner";
 import { setNewOffset, autoGrow, setZIndex, bodyParser } from "../utils";
 import { db } from "../appwrite/databases";
